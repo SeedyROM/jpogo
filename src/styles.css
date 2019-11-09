@@ -1,0 +1,51 @@
+body {
+  background: #111;
+  color: #f3f3f3;
+}
+.App {
+  font-family: sans-serif;
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+}
+
+.input {
+  padding: 2rem;
+  cursor: pointer;
+
+  background: rgba(120, 150, 200, 0.4);
+}
+
+.error {
+  background: tomato;
+  color: white;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.manipulate {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.manipulate label {
+  display: block;
+  margin-right: 1rem;
+}
+
+.preview {
+  padding: 0 2rem;
+
+  display: flex;
+  justify-content: center;
+
+  margin-bottom: 2rem;
+}
+
+.preview img {
+  width: 100%;
+  display: block;
+
+  max-width: 500px;
+}

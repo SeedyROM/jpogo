@@ -1,2 +1,0 @@
-# jpogo
-Created with CodeSandbox
