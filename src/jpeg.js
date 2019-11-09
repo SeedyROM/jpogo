@@ -30,7 +30,7 @@ export const jpegToTypedArray = file => {
 /**
  * Find the DQT in a JPEG binary
  * @param {Uint8Array} data
- * @returns {number}
+ * @returns {number} offset
  */
 export const quantizationTableOffset = data => {
   let i = 0;
@@ -43,11 +43,12 @@ export const quantizationTableOffset = data => {
 /**
  * Find the DRI in a JPEG binary
  * @param {Uint8Array} data
- * @returns {number}
+ * @returns {number} offset
  */
 export const restartIntervalOffset = data => {
   let i = 0;
   for (; i < data.length - 1; i++) {
+    console.log(i);
     if (data[i] === 0xff && data[i + 1] === 0xdd) break;
   }
   return i + 1;
@@ -69,9 +70,9 @@ export const dqtEffectors = {
  */
 export const driEffectors = {
   shift: {
-    offset: 3,
+    offset: 4,
     min: 0x00,
-    max: 0x10
+    max: 0x28
   }
 };
 

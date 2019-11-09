@@ -39,6 +39,7 @@ function App() {
 
     const extension = event.target.value.split(".").pop();
     if (extension === "jpg" || extension === "jpeg") {
+      setError(null);
       setFile(event.target.files[0]);
     } else {
       setError("Image must be a JPEG");
@@ -52,25 +53,18 @@ function App() {
    * @param {number} offset
    */
   const manipulateBytes = (type, value, offset) => {
-    let newBytes;
-
-    switch (type) {
-      case "dqt":
-        const dqtOffset = quantizationTableOffset(bytes);
-        newBytes = bytes.slice();
-        newBytes[dqtOffset + offset] = Math.floor(value);
-        setBytes(newBytes);
-        break;
-
-      case "dri":
-        const driOffset = restartIntervalOffset(bytes);
-        newBytes = bytes.slice();
-        newBytes[driOffset + offset] = Math.floor(value);
-        setBytes(newBytes);
-        break;
-
-      default:
-        throw new Error("Invalid manipulation");
+    if (type === "dqt") {
+      const dqtOffset = quantizationTableOffset(bytes);
+      const newBytes = bytes.slice();
+      newBytes[dqtOffset + offset] = Math.floor(value);
+      setBytes(newBytes);
+    } else if (type === "dri") {
+      const driOffset = restartIntervalOffset(bytes);
+      const newBytes = bytes.slice();
+      newBytes[driOffset + offset] = Math.floor(value);
+      setBytes(newBytes);
+    } else {
+      throw new Error("Invalid manipulation");
     }
   };
 
@@ -102,11 +96,9 @@ function App() {
    */
   const effectorControls = Object.keys(effectors).map(type => {
     return Object.keys(effectors[type]).map(name => {
-      console.log(type);
       const { max, min, offset } = effectors[type][name];
-      console.log(max, min);
       return (
-        <div className="manipulate">
+        <div className="manipulate" key={type + offset}>
           <label>{name.charAt(0).toUpperCase() + name.slice(1)}:</label>
           <input
             type="range"
