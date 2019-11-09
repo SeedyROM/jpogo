@@ -48,7 +48,7 @@ export const quantizationTableOffset = data => {
 export const restartIntervalOffset = data => {
   let i = 0;
   for (; i < data.length - 1; i++) {
-    if (data[i] === 0xff && data[i + 1] === 0xdd) break;
+    if (data[i] === 0x63 && data[i + 1] === 0x86) break;
   }
   return i + 1;
 };

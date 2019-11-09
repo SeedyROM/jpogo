@@ -8,6 +8,7 @@ import {
   effectors
 } from "./jpeg";
 
+import "./slider.css";
 import "./styles.css";
 
 function App() {
